@@ -13,20 +13,28 @@ function App() {
     setTodos(currstate)
   }
 
+  function handleKeyPress(e) {
+    if (e.charCode === 13) {
+      addTodo()
+    }
+  }
+
   function addTodo() {
     // Generate a unique ID for each key 
     const id = uuidv1()
-    console.log(id)
-    const newtodo = {name: todoRef.current.value, id: id, checked: false}
-    const newtodos = [...todos, newtodo]
-    setTodos(newtodos)
-    todoRef.current.value = null
+    const val = todoRef.current.value 
+    if (val && val.trim()) {
+      const newtodo = {name: val, id: id, checked: false}
+      const newtodos = [...todos, newtodo]
+      setTodos(newtodos)
+      todoRef.current.value = null
+    }
   }
 
   return (
     <>
       <TodoList todos={todos} handler={checkTodo}/>
-      <input ref={todoRef} type="text"/>
+      <input ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
       <button onClick={addTodo}>Add</button>
       <button>Clear done</button>
     </>
