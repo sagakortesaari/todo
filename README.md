@@ -1,9 +1,5 @@
-# reacty
+## todo
 
-simple to-do app created using react 
+⚡ creating a simple to-do web-app using react 
 
-npx create-react-app my-app
-
-cd my-app
-
-npm start
+CURRENTLY IN PROGRESS
