@@ -8,7 +8,7 @@ export default function Todo({ todo, handler }) {
 
     return (
         <>
-            <div className="test">
+            <div className="todo">
                 <input type="checkbox" checked={todo.checked} onChange={() => handleCheck(todo.id)}/>
                 {todo.name}
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 import Todo from './Todo'
+import './TodoList.css'
 
 export default function TodoList({color, id}) {
     const [todos, setTodos] = useState([])
@@ -44,7 +45,7 @@ export default function TodoList({color, id}) {
 
     return (
         <>
-            <div>
+            <div className="list" style={{backgroundColor: color}}>
                 {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
                 <input ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
                 <button onClick={addTodo}>Add</button>
