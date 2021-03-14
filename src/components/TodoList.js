@@ -1,14 +1,25 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 import Todo from './Todo'
 
-export default function TodoList({color}) {
+export default function TodoList({color, id}) {
     const [todos, setTodos] = useState([])
     const todoRef = useRef()
 
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem(id))
+        if (items != null) {
+            setTodos(items)
+        }
+    }, []) 
+
+    useEffect(() => {
+        localStorage.setItem(id, JSON.stringify(todos))
+    }, [todos]) 
+
     function handleKeyPress(e) {
         if (e.charCode === 13) {
-        //addTodo()
+            addTodo()
         }
     }
 

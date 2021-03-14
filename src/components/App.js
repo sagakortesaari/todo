@@ -1,34 +1,33 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import TodoList from './TodoList'
 import { v1 as uuidv1 } from 'uuid'
 import './App.css'
 
 function App() {
-    const [todos, setTodos] = useState([])
+    const [lists ,setLists] = useState([])
 
-  /*
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('todos'))
-    if (items.length > 0) {
-      setTodos(items)
-    }
-  }, []) 
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('lists'))
+        if (items != null) {
+        setLists(items)
+        }
+    }, []) 
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [todos]) */
+    useEffect(() => {
+        localStorage.setItem('lists', JSON.stringify(lists))
+    }, [lists]) 
 
     function addList() {
         const id = uuidv1()
         const newlist = {color: '#fff', id: id}
-        const currstate = [...todos, newlist]
-        setTodos(currstate)
+        const currstate = [...lists, newlist]
+        setLists(currstate)
     }
 
     return (
         <>
             <div><button onClick={addList}>Add list</button></div>
-            {todos.map(todo => <TodoList key={todo.id} color={todo.color}/>)}
+            {lists.map(list => <TodoList key={list.id} color={list.color} id={list.id}/>)}
         </>
     );
 }
