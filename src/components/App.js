@@ -1,10 +1,21 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import TodoList from './TodoList'
 import { v1 as uuidv1 } from 'uuid'
 
 function App() {
   const [todos, setTodos] = useState([])
   const todoRef = useRef()
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('todos'))
+    if (items.length > 0) {
+      setTodos(items)
+    }
+  }, []) 
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   function checkTodo(id) {
     const currstate = [...todos]
