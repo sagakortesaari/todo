@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 import Todo from './Todo'
 import './TodoList.css'
+import {motion} from 'framer-motion'
 
 export default function TodoList({color, id}) {
     const [todos, setTodos] = useState([])
