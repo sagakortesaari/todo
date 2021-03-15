@@ -9,7 +9,7 @@ import './App.css'
 function App() {
     const [lists,setLists] = useState([])
     const [clicked, setClicked] = useState(false)
-    const [color, setColor] = useState([{color: '#FF8F8F', pos: 1}, {color:'#C0ADF5', pos: 2}, {color:'#3E98EC', pos:3}, {color:'#A6E29D', pos:4}, {color:'#FFDE88', pos:5}])
+    const color = [{color: '#FF8F8F', pos: 1}, {color:'#C0ADF5', pos: 2}, {color:'#3E98EC', pos:3}, {color:'#A6E29D', pos:4}, {color:'#FFDE88', pos:5}]
 
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('lists'))
@@ -29,14 +29,6 @@ function App() {
         //const currstate = [...lists, newlist]
         //setLists(currstate)
     }
-
-    /*
-                    <motion.button animate={{rotate: 180, scale: 1}} initial={{scale: 0}} variants={variants} whileHover = {{scale: 1.2}} className="color" style={{backgroundColor:'#FF8F8F'}}></motion.button>
-                    <motion.button whileHover = {{scale: 1.2}} className="color" style={{backgroundColor:'#C0ADF5'}}></motion.button>
-                    <motion.button whileHover = {{scale: 1.2}} className="color" style={{backgroundColor:'#3E98EC'}}></motion.button>
-                    <motion.button whileHover = {{scale: 1.2}} className="color" style={{backgroundColor:'#A6E29D'}}></motion.button>
-                    <motion.button whileHover = {{scale: 1.2}} className="color" style={{backgroundColor:'#FFDE88'}}></motion.button>
-    */
 
     return (
         <div id="App">
