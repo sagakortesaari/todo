@@ -26,7 +26,7 @@ function App() {
         const id = uuidv1()
         console.log("hiiiiiiii")
         const newlist = {color: color, id: id}
-        const currstate = [...lists, newlist]
+        const currstate = [newlist, ...lists]
         setLists(currstate)
     }
 
