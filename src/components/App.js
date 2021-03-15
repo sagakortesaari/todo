@@ -22,20 +22,20 @@ function App() {
         localStorage.setItem('lists', JSON.stringify(lists))
     }, [lists]) 
 
-    function addList() {
+    function addList(color) {
         const id = uuidv1()
-        const newlist = {color: '#000', id: id}
-        setClicked(!clicked)
-        //const currstate = [...lists, newlist]
-        //setLists(currstate)
+        console.log("hiiiiiiii")
+        const newlist = {color: color, id: id}
+        const currstate = [...lists, newlist]
+        setLists(currstate)
     }
 
     return (
         <div id="App">
             <div className="sidebar">
-                <button onClick={addList} id="addlist">+</button>
+                <button onClick={() => setClicked(!clicked)} id="addlist">+</button>
                 <div className="colors">
-                    {color.map(color => <Color color={color.color} clicked={clicked} startingpos={color.pos}/>)}
+                    {color.map(color => <Color color={color.color} clicked={clicked} startingpos={color.pos} handler={addList}/>)}
                 </div>
             </div>
             <div className="other">
