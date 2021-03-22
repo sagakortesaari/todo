@@ -26,6 +26,7 @@ export default function TodoList({color, id}) {
     }
 
     function checkTodo(id) {
+        console.log("button clicked");
         const currstate = [...todos]
         const todo = currstate.find(todo => todo.id === id)
         todo.checked = !todo.checked

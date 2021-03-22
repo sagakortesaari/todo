@@ -32,7 +32,7 @@ function App() {
             <div className="sidebar">
                 <button onClick={() => setClicked(!clicked)} id="addlist">+</button>
                 <div className="colors">
-                    {color.map(color => <Color color={color.color} clicked={clicked} key={uuidv1()} startingpos={color.pos} handler={addList}/>)}
+                    {color.map(color => <Color color={color.color} clicked={clicked} key={color.pos} startingpos={color.pos} handler={addList}/>)}
                 </div>
             </div>
             <div className="other">

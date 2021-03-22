@@ -45,6 +45,7 @@ body {
     border: 0px;
     animation-duration: 3s;
     margin-top: 20px;
+    outline: none;
 }
 
 #addlist {
