@@ -1,8 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import TodoList from './TodoList'
 import { v1 as uuidv1 } from 'uuid'
-import {useSpring} from 'react-spring'
-import {motion} from 'framer-motion'
 import Color from './Color'
 import './App.css'
 
@@ -24,7 +22,6 @@ function App() {
 
     function addList(color) {
         const id = uuidv1()
-        console.log("hiiiiiiii")
         const newlist = {color: color, id: id}
         const currstate = [newlist, ...lists]
         setLists(currstate)
@@ -35,7 +32,7 @@ function App() {
             <div className="sidebar">
                 <button onClick={() => setClicked(!clicked)} id="addlist">+</button>
                 <div className="colors">
-                    {color.map(color => <Color color={color.color} clicked={clicked} startingpos={color.pos} handler={addList}/>)}
+                    {color.map(color => <Color color={color.color} clicked={clicked} key={uuidv1()} startingpos={color.pos} handler={addList}/>)}
                 </div>
             </div>
             <div className="other">
