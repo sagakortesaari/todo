@@ -5,7 +5,6 @@ import './TodoList.css'
 import {AnimatePresence, motion} from 'framer-motion'
 import { Icon, InlineIcon } from '@iconify/react';
 import penIcon from '@iconify/icons-fa-solid/pen';
-import checkmarkSquare2Fill from '@iconify/icons-eva/checkmark-square-2-fill';
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
@@ -30,7 +29,6 @@ export default function TodoList({color, id, handler, listname}) {
     }
 
     function checkTodo(id) {
-        console.log("button clicked");
         const currstate = [...todos]
         const todo = currstate.find(todo => todo.id === id)
         todo.checked = !todo.checked
@@ -57,9 +55,15 @@ export default function TodoList({color, id, handler, listname}) {
         return false 
     }
 
-    function showAdd() {
-        clicked = !clicked
-        console.log(clicked) 
+    function clearChecked() {
+        const listtodos = localStorage.getItem(id)
+        let newtodos = []
+        JSON.parse(listtodos).forEach(element => {
+            if (!element.checked) {
+                newtodos.push(element)
+            }
+        });
+        setTodos(newtodos)
     }
 
     const transition = {
@@ -82,7 +86,7 @@ export default function TodoList({color, id, handler, listname}) {
                     <motion.div animate={clicked ? "visible":"hidden"} initial="visible" variants={variants} className="editList">
                         <input id="todoAdd" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
                         <button className="editbutton" onClick={addTodo}>Add</button>
-                        <button className="editbutton">Clear done</button>
+                        <button className="editbutton" onClick={clearChecked}>Clear done</button>
                     </motion.div>
                     <Icon onClick={() => setClicked(!clicked)} className="pen" icon={penIcon} />
                 </motion.div>
