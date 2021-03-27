@@ -8,6 +8,7 @@ import penIcon from '@iconify/icons-fa-solid/pen';
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
+    const [clicked, setClicked] = useState(false)
     const todoRef = useRef()
 
     useEffect(() => {
@@ -55,10 +56,20 @@ export default function TodoList({color, id, handler, listname}) {
         return false 
     }
 
+    function showAdd() {
+        clicked = !clicked
+        console.log(clicked) 
+    }
+
     const transition = {
         type: "spring",
         stiffness: 260,
         damping: 20
+    }
+
+    const variants = {
+        visible: {opacity: 1},
+        hidden: {opacity: 0}
     }
 
     return (
@@ -67,12 +78,12 @@ export default function TodoList({color, id, handler, listname}) {
                 <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} transition={transition} className="list" style={{backgroundColor: color}}>
                     <input className="listname" placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
-                    <div className="editList">
+                    <motion.div animate={clicked ? "visible":"hidden"} initial="visible" variants={variants} className="editList">
                         <input id="todoAdd" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
                         <button className="editbutton" onClick={addTodo}>Add</button>
                         <button className="editbutton">Clear done</button>
-                    </div>
-                    <Icon className="pen" icon={penIcon} />
+                    </motion.div>
+                    <Icon onClick={() => setClicked(!clicked)} className="pen" icon={penIcon} />
                 </motion.div>
             </AnimatePresence>
         </>
