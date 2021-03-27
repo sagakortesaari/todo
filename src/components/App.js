@@ -3,6 +3,8 @@ import TodoList from './TodoList'
 import { v1 as uuidv1 } from 'uuid'
 import Color from './Color'
 import './App.css'
+import { Icon, InlineIcon } from '@iconify/react';
+import plusCircleSolid from '@iconify/icons-clarity/plus-circle-solid';
 
 function App() {
     const [lists,setLists] = useState([])
@@ -40,7 +42,7 @@ function App() {
     return (
         <div id="App">
             <div className="sidebar">
-                <button onClick={() => setClicked(!clicked)} id="addlist">+</button>
+                <button onClick={() => setClicked(!clicked)} id="addlist"><Icon id="addicon" icon={plusCircleSolid} /></button>
                 <div className="colors">
                     {color.map(color => <Color color={color.color} clicked={clicked} key={color.pos} startingpos={color.pos} handler={addList}/>)}
                 </div>

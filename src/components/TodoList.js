@@ -3,6 +3,8 @@ import { v1 as uuidv1 } from 'uuid'
 import Todo from './Todo'
 import './TodoList.css'
 import {AnimatePresence, motion} from 'framer-motion'
+import { Icon, InlineIcon } from '@iconify/react';
+import penIcon from '@iconify/icons-fa-solid/pen';
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
@@ -66,10 +68,11 @@ export default function TodoList({color, id, handler, listname}) {
                     <input className="listname" placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
                     <div className="editList">
-                        <input ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
-                        <button onClick={addTodo}>Add</button>
-                        <button>Clear done</button>
+                        <input id="todoAdd" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
+                        <button className="editbutton" onClick={addTodo}>Add</button>
+                        <button className="editbutton">Clear done</button>
                     </div>
+                    <Icon className="pen" icon={penIcon} />
                 </motion.div>
             </AnimatePresence>
         </>
