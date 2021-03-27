@@ -5,6 +5,7 @@ import './TodoList.css'
 import {AnimatePresence, motion} from 'framer-motion'
 import { Icon, InlineIcon } from '@iconify/react';
 import penIcon from '@iconify/icons-fa-solid/pen';
+import checkmarkSquare2Fill from '@iconify/icons-eva/checkmark-square-2-fill';
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])

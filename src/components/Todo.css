@@ -7,7 +7,8 @@
 }
 
 .checkedButton {
-    background-color: pink;
+    background: url('https://api.iconify.design/fluent:checkmark-24-filled.svg') no-repeat center center / contain;
+    background-color: white;
 }
 
 .btn {
@@ -17,6 +18,19 @@
     border-radius: 5px;
     border: None;
     margin-right: 10px;
+}
+
+.btnn {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+}
+
+.checkmark {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
 }
 
 .todoname {

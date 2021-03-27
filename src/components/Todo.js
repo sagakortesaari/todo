@@ -1,5 +1,7 @@
 import React from 'react'
 import './Todo.css'
+import { Icon, InlineIcon } from '@iconify/react';
+import checkmarkSquare2Fill from '@iconify/icons-eva/checkmark-square-2-fill';
 
 export default function Todo({ todo, handler }) {
     function handleCheck(id) {
