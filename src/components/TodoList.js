@@ -4,7 +4,7 @@ import Todo from './Todo'
 import './TodoList.css'
 import {AnimatePresence, motion} from 'framer-motion'
 
-export default function TodoList({color, id}) {
+export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
     const todoRef = useRef()
 
@@ -63,7 +63,7 @@ export default function TodoList({color, id}) {
         <>
             <AnimatePresence initial={checkStorage() ? false : true}>
                 <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} transition={transition} className="list" style={{backgroundColor: color}}>
-                    <input id="listname" placeholder="Enter list name.."/>
+                    <input className="listname" placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
                     <div className="editList">
                         <input ref={todoRef} type="text" onKeyPress={handleKeyPress}/>

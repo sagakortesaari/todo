@@ -22,8 +22,18 @@ function App() {
 
     function addList(color) {
         const id = uuidv1()
-        const newlist = {color: color, id: id}
+        const newlist = {title: "", color: color, id: id}
         const currstate = [newlist, ...lists]
+        setLists(currstate)
+    }
+
+    function addTitle(id, title) {
+        const lists = JSON.parse(localStorage.getItem('lists'))
+        const list = lists.find(list => list.id === id)
+        const newlist = list 
+        newlist.title = title
+        const currstate = [...lists]
+        currstate.splice(currstate.indexOf(list), 1, newlist)
         setLists(currstate)
     }
 
@@ -38,7 +48,7 @@ function App() {
             <div className="other">
                 <p id="title">To-do</p>
                 <div id="todo-lists">
-                    {lists.map(list => <TodoList key={list.id} color={list.color} id={list.id}/>)}
+                    {lists.map(list => <TodoList key={list.id} color={list.color} id={list.id} listname={list.title} handler={addTitle}/>)}
                 </div>
             </div>
         </div>
