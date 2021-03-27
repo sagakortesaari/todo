@@ -9,7 +9,7 @@ export default function Todo({ todo, handler }) {
     return (
         <>
             <div className="todo">
-                <input className={todo.checked ? "checkedButton" : ""} type="button" onClick={() => handleCheck(todo.id)}/>
+                <input className={todo.checked ? "btn checkedButton" : "btn"} type="button" onClick={() => handleCheck(todo.id)}/>
                 {todo.name}
             </div>
         </>

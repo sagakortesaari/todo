@@ -1,8 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap');
+
 .list {
     margin-right: 20px;
-    width: 400px;
-    background-color: aqua;
-    height: 300px;
+    width: 350px;
+    min-height: 350px;
+    height: fit-content;
     border-radius: 40px;
     margin-bottom: 20px;
+    position: relative;
+}
+
+#listname {
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: None;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 30px;
+    outline: None;
+}
+
+.editList {
+    position: absolute;
+    margin-left: 20px;
+    bottom: 20px;
+}
+
+.todo:nth-last-child(2) {   
+    margin-bottom: 60px;
 }

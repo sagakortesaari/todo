@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500&display=swap');
 
-.todo:first-child {
-    margin-top: 50px;
-}
-
 .todo {
     font-family: Work Sans;
     font-weight: 400;
+    margin-left: 20px;
 }
 
 .checkedButton {
     background-color: pink;
+}
+
+.btn {
+    outline: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: None;
+    margin-right: 10px;
 }

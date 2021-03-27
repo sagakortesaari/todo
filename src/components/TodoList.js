@@ -63,10 +63,13 @@ export default function TodoList({color, id}) {
         <>
             <AnimatePresence initial={checkStorage() ? false : true}>
                 <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} transition={transition} className="list" style={{backgroundColor: color}}>
+                    <input id="listname" placeholder="Enter list name.."/>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
-                    <input ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
-                    <button onClick={addTodo}>Add</button>
-                    <button>Clear done</button>
+                    <div className="editList">
+                        <input ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
+                        <button onClick={addTodo}>Add</button>
+                        <button>Clear done</button>
+                    </div>
                 </motion.div>
             </AnimatePresence>
         </>
