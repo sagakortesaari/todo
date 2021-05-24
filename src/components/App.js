@@ -5,6 +5,7 @@ import Color from './Color'
 import './App.css'
 import { Icon, InlineIcon } from '@iconify/react';
 import plusCircleSolid from '@iconify/icons-clarity/plus-circle-solid';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     const [lists,setLists] = useState([])

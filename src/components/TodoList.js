@@ -5,6 +5,8 @@ import './TodoList.css'
 import {AnimatePresence, motion} from 'framer-motion'
 import { Icon, InlineIcon } from '@iconify/react';
 import penIcon from '@iconify/icons-fa-solid/pen';
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
@@ -28,9 +30,8 @@ export default function TodoList({color, id, handler, listname}) {
     useEffect(() => {
         const len = todos.length
         if (len != 0) {
-            setPercentage(progress/len)
+            setPercentage((progress/len)*100)
         } 
-        console.log(percentage)
     }, [progress])
 
     function handleKeyPress(e) {
@@ -105,13 +106,40 @@ export default function TodoList({color, id, handler, listname}) {
         hidden: {opacity: 0}
     }
 
+    const theme = {
+        default: {
+            symbol: '😱',
+            color: 'pink',
+            trailcolor: 'pink' 
+        },
+
+        error: {
+            symbol: percentage + '%', 
+            color: 'pink',
+            trailcolor: 'pink' 
+        },
+
+        active: {
+            symbol: percentage + '%',
+            color: 'pink',
+            trailcolor: 'pink' 
+        },
+
+        success: {
+            symbol: '🌟',
+            color: 'pink',
+            trailcolor: 'pink' 
+        }
+
+    }
+
     return (
         <>
             <AnimatePresence initial={checkStorage() ? false : true}>
                 <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} transition={transition} className="list" style={{backgroundColor: color}}>
                     <input className="listname" placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
-                    <div id="progressbar">
-                        {percentage}
+                    <div id="progress">
+                        <Progress className="progressbar" theme={theme} percent={percentage}/>
                     </div>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
                     <motion.div animate={clicked ? "visible":"hidden"} initial="visible" variants={variants} className="editList">
