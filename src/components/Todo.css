@@ -6,6 +6,20 @@
     margin-left: 20px;
 }
 
+.deletetodo {
+    padding-top: 3px;
+    position: absolute;
+    right: 20px;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
 .checkedButton {
     background: url('https://api.iconify.design/fluent:checkmark-24-filled.svg') no-repeat center center / contain;
     background-color: white;

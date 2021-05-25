@@ -23,10 +23,6 @@
     outline: None;
 }
 
-.listname::placeholder {
-    color:Green;
-}
-
 .editList {
     position: absolute;
     margin-left: 20px;

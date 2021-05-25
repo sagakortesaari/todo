@@ -96,6 +96,20 @@ export default function TodoList({color, id, handler, listname}) {
         setProgress(amount)
     }
 
+    function handleDelete(todo) {
+        console.log("deleting")
+        const listtodos = localStorage.getItem(id)
+        let newtodos = []
+        console.log(todo)
+        JSON.parse(listtodos).forEach(element => {
+            console.log(element)
+            if (element.id != todo.id) {
+                newtodos.push(element)
+            }
+        });
+        setTodos(newtodos)
+    }
+
     const transition = {
         type: "spring",
         stiffness: 260,
@@ -176,10 +190,10 @@ export default function TodoList({color, id, handler, listname}) {
                     <div id="progress">
                         <Progress className="progressbar" theme={theme} percent={percentage}/>
                     </div>
-                    {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
+                    {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo} deletehandler={handleDelete}/>)}
                     <span id="newtodo">
                         <Icon onClick={addTodo} icon={plusLg} />
-                        <input id="todoAdd" autocomplete="off" placeholder="enter new task" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
+                        <input id="todoAdd" autoComplete="off" placeholder="enter new task" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
                         <button className="editbutton" onClick={clearChecked}>Clear done</button>
                     </span>
                 </motion.div>

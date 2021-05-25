@@ -49,7 +49,7 @@ function App() {
                 </div>
             </div>
             <div className="other">
-                <p id="title">To-do</p>
+                <p id="title">time to get shit done</p>
                 <div id="todo-lists">
                     {lists.map(list => <TodoList key={list.id} color={list.color} id={list.id} listname={list.title} handler={addTitle}/>)}
                 </div>
