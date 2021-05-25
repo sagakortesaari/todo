@@ -12,7 +12,6 @@ import plusLg from '@iconify-icons/bi/plus-lg';
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
-    const [clicked, setClicked] = useState(false)
     const [progress, setProgress] = useState(0)
     const [percentage, setPercentage] = useState(0)
     const todoRef = useRef()
@@ -31,10 +30,11 @@ export default function TodoList({color, id, handler, listname}) {
 
     useEffect(() => {
         const len = todos.length
+        console.log(len)
         if (len != 0) {
             setPercentage(Math.round((progress/len)*100))
         } 
-    }, [progress])
+    }, [todos])
 
     function handleKeyPress(e) {
         if (e.charCode === 13) {
@@ -93,7 +93,6 @@ export default function TodoList({color, id, handler, listname}) {
                 amount++
             }
         })
-        console.log(amount)
         setProgress(amount)
     }
 
