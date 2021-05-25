@@ -13,7 +13,6 @@ import plusLg from '@iconify-icons/bi/plus-lg';
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
     const [progress, setProgress] = useState(0)
-    const [percentage, setPercentage] = useState(0)
     const todoRef = useRef()
 
     useEffect(() => {
@@ -27,14 +26,6 @@ export default function TodoList({color, id, handler, listname}) {
         localStorage.setItem(id, JSON.stringify(todos))
         checkProgress()
     }, [todos]) 
-
-    useEffect(() => {
-        const len = todos.length
-        console.log(len)
-        if (len != 0) {
-            setPercentage(Math.round((progress/len)*100))
-        } 
-    }, [todos])
 
     function handleKeyPress(e) {
         if (e.charCode === 13) {
@@ -93,16 +84,19 @@ export default function TodoList({color, id, handler, listname}) {
                 amount++
             }
         })
-        setProgress(amount)
+
+        if (todos.length != 0) {
+            setProgress(Math.round((amount/todos.length)*100))
+        } else {
+            setProgress(0)
+        }
     }
 
     function handleDelete(todo) {
         console.log("deleting")
         const listtodos = localStorage.getItem(id)
         let newtodos = []
-        console.log(todo)
         JSON.parse(listtodos).forEach(element => {
-            console.log(element)
             if (element.id != todo.id) {
                 newtodos.push(element)
             }
@@ -125,25 +119,16 @@ export default function TodoList({color, id, handler, listname}) {
         default: {
             symbol: '😱',
             color: 'pink',
-            trailcolor: 'pink' 
-        },
-
-        error: {
-            symbol: percentage + '%', 
-            color: 'pink',
-            trailcolor: 'pink' 
         },
 
         active: {
-            symbol: percentage + '%',
+            symbol: progress + '%',
             color: 'pink',
-            trailcolor: 'pink' 
         },
 
         success: {
             symbol: '🌟',
             color: 'pink',
-            trailcolor: 'pink' 
         }
 
     }
@@ -188,7 +173,7 @@ export default function TodoList({color, id, handler, listname}) {
                 <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} transition={transition} className="list" style={{backgroundColor: color}}>
                     <input className="listname" style={style} placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
                     <div id="progress">
-                        <Progress className="progressbar" theme={theme} percent={percentage}/>
+                        <Progress className="progressbar" theme={theme} percent={progress}/>
                     </div>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo} deletehandler={handleDelete}/>)}
                     <span id="newtodo">
