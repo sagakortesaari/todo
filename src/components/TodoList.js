@@ -7,6 +7,8 @@ import { Icon, InlineIcon } from '@iconify/react';
 import penIcon from '@iconify/icons-fa-solid/pen';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
+import plusCircleSolid from '@iconify/icons-clarity/plus-circle-solid';
+import plusLg from '@iconify-icons/bi/plus-lg';
 
 export default function TodoList({color, id, handler, listname}) {
     const [todos, setTodos] = useState([])
@@ -30,7 +32,7 @@ export default function TodoList({color, id, handler, listname}) {
     useEffect(() => {
         const len = todos.length
         if (len != 0) {
-            setPercentage((progress/len)*100)
+            setPercentage(Math.round((progress/len)*100))
         } 
     }, [progress])
 
@@ -133,21 +135,54 @@ export default function TodoList({color, id, handler, listname}) {
 
     }
 
+    function LightenDarkenColor(col, amt) {
+  
+        var usePound = false;
+      
+        if (col[0] == "#") {
+            col = col.slice(1);
+            usePound = true;
+        }
+     
+        var num = parseInt(col,16);
+     
+        var r = (num >> 16) + amt;
+     
+        if (r > 255) r = 255;
+        else if  (r < 0) r = 0;
+     
+        var b = ((num >> 8) & 0x00FF) + amt;
+     
+        if (b > 255) b = 255;
+        else if  (b < 0) b = 0;
+     
+        var g = (num & 0x0000FF) + amt;
+     
+        if (g > 255) g = 255;
+        else if (g < 0) g = 0;
+     
+        return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+      
+    }
+
+    const style = {
+        color: LightenDarkenColor(color, -100)
+    }
+
     return (
         <>
             <AnimatePresence initial={checkStorage() ? false : true}>
                 <motion.div initial={{scale: 0}} animate={{rotate: 360, scale: 1}} transition={transition} className="list" style={{backgroundColor: color}}>
-                    <input className="listname" placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
+                    <input className="listname" style={style} placeholder="Enter list name.." onChange={(e) => handler(id, e.target.value)} value={listname}/>
                     <div id="progress">
                         <Progress className="progressbar" theme={theme} percent={percentage}/>
                     </div>
                     {todos.map(todo => <Todo key={todo.id} todo={todo} handler={checkTodo}/>)}
-                    <motion.div animate={clicked ? "visible":"hidden"} initial="visible" variants={variants} className="editList">
-                        <input id="todoAdd" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
-                        <button className="editbutton" onClick={addTodo}>Add</button>
+                    <span id="newtodo">
+                        <Icon onClick={addTodo} icon={plusLg} />
+                        <input id="todoAdd" autocomplete="off" placeholder="enter new task" ref={todoRef} type="text" onKeyPress={handleKeyPress}/>
                         <button className="editbutton" onClick={clearChecked}>Clear done</button>
-                    </motion.div>
-                    <Icon onClick={() => setClicked(!clicked)} className="pen" icon={penIcon} />
+                    </span>
                 </motion.div>
             </AnimatePresence>
         </>

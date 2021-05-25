@@ -23,21 +23,40 @@
     outline: None;
 }
 
+.listname::placeholder {
+    color:Green;
+}
+
 .editList {
     position: absolute;
     margin-left: 20px;
     bottom: 20px;
 }
 
-.todo:nth-last-child(3) {   
+.todo:nth-last-child(2) {   
     margin-bottom: 60px;
 }
 
 #todoAdd {
     border: none;
     border-bottom: 1.5px solid black;
+    padding-bottom: 5px;
+    margin-left: 10px;
     background-color: transparent;
     outline: none;
+    font-size: 16px;
+}
+
+#newtodo {
+    position: absolute;
+    bottom: 20px;
+    margin-left: 20px;
+}
+
+#newtodo input {
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
 }
 
 #progress {
